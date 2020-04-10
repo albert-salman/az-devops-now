@@ -8,6 +8,8 @@ MSFT [extension](https://docs.microsoft.com/en-us/azure/devops/pipelines/release
 
 But this makes impossible to use developer ServiceNow instances as it is impossible to install applications there.
 
+There is a way to overcome this requirement (application installation on ServiceNow instance from ServiceNow MarketPlace) by using modified extension which directly hit change request table over ServiceNow REST API, so this will work even on developer ServiceNow instances.
+
 MSFT extension is open source (MIT license) and available here: [GitHub repo](https://github.com/microsoft/azure-pipelines-extensions/tree/master/Extensions/ServiceNow/Src)
 
 This custom extension is based on MSFT one.
