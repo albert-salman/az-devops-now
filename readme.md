@@ -10,7 +10,7 @@ But this makes impossible to use developer ServiceNow instances as it is impossi
 
 MSFT extension is open source (MIT license) and available here: [GitHub repo](https://github.com/microsoft/azure-pipelines-extensions/tree/master/Extensions/ServiceNow/Src)
 
-Custom extension based on MSFT one is available here: [GitHub repo](https://github.com/albert-salman/az-devops-now). Instruction provided with repo readme.
+This custom extension is based on MSFT one.
 
 If best practices mentioned above are not critical then with caution this extension can be used on non-developer instances upon getting approval on reduced performance and security.
 
