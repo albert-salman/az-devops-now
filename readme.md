@@ -12,7 +12,7 @@ There is a way to overcome this requirement (application installation on Service
 
 MSFT extension is open source (MIT license) and available here: [GitHub repo](https://github.com/microsoft/azure-pipelines-extensions/tree/master/Extensions/ServiceNow/Src)
 
-This custom extension is based on MSFT one.
+This custom extension is based on MSFT one. Source code is here: [GitHub repo](https://github.com/albert-salman/az-devops-now)
 
 If best practices mentioned above are not critical then with caution this extension can be used on non-developer instances upon getting approval on reduced performance and security.
 
