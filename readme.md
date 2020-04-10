@@ -24,6 +24,19 @@ The deployment process in Azure Pipelines helps automate the deployment and comp
 
 ## Usage
 
+### Build and publish
+
+You will need to update the publisher, author and GUID for each task in this repo if you want to publish your own copy.
+
+To package the extension, then run the following command:
+
+```cli
+yarn install
+yarn run package
+```
+
+You can now upload the extension using `tfx extension publish` or via the [manage publisher portal](https://marketplace.visualstudio.com/manage/publishers/) (no special requirements to create own publisher - just register/sign-in).
+
 ### **Create users and accounts in ServiceNow**
 
 For the two services to communicate, a service/user account in ServiceNow must be granted the `rest_service` and `change_manager` roles. Create or edit a user in ServiceNow for this purpose.
@@ -127,11 +140,13 @@ ServiceNow gate produces output variables.                                     
 
 See original extension [FAQ item](https://docs.microsoft.com/en-us/azure/devops/pipelines/release/approvals/servicenow?view=azure-devops#q-i-dont-see-drop-down-values-populated-for-category-status-and-others-what-should-i-do)
 
-### Drop downs are working weird (just one value)
+### Drop downs are working weird (just one value etc)
 
-This happen on developer ServiceNow instances. Use direct state value. For example for change state see [this link](https://docs.servicenow.com/bundle/istanbul-it-service-management/page/product/change-management/task/state-model-activate-tasks.html)
+This happen on developer ServiceNow instances. Use real state value. For example for change state see [this link](https://docs.servicenow.com/bundle/istanbul-it-service-management/page/product/change-management/task/state-model-activate-tasks.html)
 
 So for example to check in gate properties that Change is in "Implement" state use "-5" value in field "Success criteria/Desired status of change request".
+
+In general, see how `dataSources` work [here](https://github.com/microsoft/azure-pipelines-extensions/blob/master/docs/authoring/endpoints/dataSources.md)
 
 ### How to register Azure DevOps in ServiceNow as an OAuth App
 
@@ -149,3 +164,8 @@ If you plan to use OAuth to connect to your ServiceNow instance from Azure DevOp
 2. View gate logs and look for expression parsing result. You will see why expression evaluation failed.
 3. As expression evaluation is based on response to Get change request API call to ServiceNow instance. Check ServiceNow response and confirms if the properties returned in API response matches to the one used in expression..
 
+### Acknowledgements
+
+MSFT extension is open source (MIT license) and available here: [GitHub repo](https://github.com/microsoft/azure-pipelines-extensions/tree/master/Extensions/ServiceNow/Src)
+
+Creation inspired by [Implement an Azure DevOps Release Gate to ServiceNow](https://colinsalmcorner.com/post/implement-an-azure-devops-release-gate-to-servicenow)
