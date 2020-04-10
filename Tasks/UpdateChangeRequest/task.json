@@ -13,8 +13,8 @@
     "Server"
   ],
   "version": {
-    "Major": 2,
-    "Minor": 162,
+    "Major": 0,
+    "Minor": 1,
     "Patch": 1
   },
   "instanceNameFormat": "Update ServiceNow Change Request",
@@ -119,25 +119,25 @@
       "Execute": [{
           "RequestInputs": {
             "EndpointId": "$(ServiceNowConnection)",
-            "EndpointUrl": "$(endpoint.url)/api/now/table/change_request?sysparm_query=number=$(ChangeRequestNumber)&sysparm_fields=number,correlation_id",
+            "EndpointUrl": "$(endpoint.url)/api/now/table/change_request?sysparm_query=number=$(ChangeRequestNumber)&sysparm_fields=number,correlation_id,sys_id",
             "Method": "GET",
             "Headers": "{\"Content-Type\":\"application/json\", \"Accept\":\"application/json\"}",
             "WaitForCompletion": "false",
             "Expression": "eq(count(root['result']), 1)"
           },
           "ExecutionOptions": {
-            "OutputVariables": "{\"CHANGE_CORRELATION_ID\" :  \"jsonpath('$.result[0].correlation_id')[0]\"}"
+            "OutputVariables": "{\"CHANGE_CORRELATION_ID\" :  \"jsonpath('$.result[0].correlation_id')[0]\", \"CHANGE_SYSTEM_ID\" :  \"jsonpath('$.result[0].sys_id')[0]\"}",
           }
         },
         {
           "RequestInputs": {
             "EndpointId": "$(ServiceNowConnection)",
-            "EndpointUrl": "$(endpoint.url)/api/now/table/change_request",
-            "Method": "POST",
-            "Body": "{\"number\": \"$(ChangeRequestNumber)\",\"correlation_id\": \"$(CHANGE_CORRELATION_ID)\",\"work_notes\": \"$(WorkNotes)\"{{#equals UpdateStatus 'true'}},\"state\": \"$(NewStatus)\"{{#equals '$(NewStatus)' '3' 1}}, \"close_code\": \"$(CloseCode)\", \"close_notes\": \"$(CloseNotes)\"{{/equals}}{{/equals}}{{#if otherParameters}}{{toCommaSeparatedKeyValueList otherParameters true}}{{/if}} }",
+            "EndpointUrl": "$(endpoint.url)/api/now/table/change_request/$(CHANGE_SYSTEM_ID)",
+            "Method": "PUT",
+            "Body": "{\"work_notes\": \"$(WorkNotes)\"{{#equals UpdateStatus 'true'}},\"state\": \"$(NewStatus)\"{{#equals '$(NewStatus)' '3' 1}}, \"close_code\": \"$(CloseCode)\", \"close_notes\": \"$(CloseNotes)\"{{/equals}}{{/equals}}{{#if otherParameters}}{{toCommaSeparatedKeyValueList otherParameters true}}{{/if}} }",
             "Headers": "{\"Content-Type\":\"application/json\", \"Accept\":\"application/json\"}",
             "WaitForCompletion": "false",
-            "Expression": "eq(jsonpath('$.result[0].status')[0], 'updated')"
+            "Expression": "eq(jsonpath('$.result.number')[0], '$(ChangeRequestNumber)')"
           }
         }
       ]

@@ -1,11 +1,11 @@
 {
   "manifestVersion": 1,
-  "id": "vss-services-servicenowchangerequestmanagement",
-  "name": "ServiceNow Change Management",
+  "id": "vss-services-poormanservicenowchg",
+  "name": "Developer ServiceNow CHG Release Gate",
   "publisher": "thitool",
-  "version": "0.1.2",
+  "version": "0.1.13",
   "public": false,
-  "description": "Integrate ServiceNow Change Management with Azure Pipelines",
+  "description": "Integrate ServiceNow Change Management (including developer instances) with Azure Pipelines",
   "categories": [
     "Azure Pipelines"
   ],

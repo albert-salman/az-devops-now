@@ -349,8 +349,8 @@
             "Method": "POST",
             "Body": "{  \"correlation_id\": \"{{#newGuid}}{{/newGuid}}\",\"type\": \"$(changeType)\",\"short_description\": \"$(shortdescription)\"{{#equals changeType 'Normal' 1}}{{#if description}}, \"description\": \"$(description)\"{{/if}}{{#if category}}, \"category\": \"$(category)\"{{/if}}{{#if priority}}, \"priority\": \"$(priority)\"{{/if}}{{#if risk}}, \"risk\": \"$(risk)\"{{/if}}{{#if impact}}, \"impact\": \"$(impact)\"{{/if}}{{#if configurationitem}}, \"cmdb_ci\": \"$(configurationitem)\" {{/if}}{{#if assignmentgroup}}, \"assignment_group\": \"$(assignmentgroup)\"{{/if}}{{/equals}}, \"requested_by_date\": \"{{toDateTimeFormat '$(RELEASE.DEPLOYMENT.STARTTIME)' 'dd-MM-yyyy HH:mm:ss UTC'}}\", \"start_date\": \"{{#if schedulestarttime}}{{toDateTimeFormat '$(schedulestarttime)' 'dd-MM-yyyy HH:mm:ss UTC'}}{{/if}}\",  \"end_date\": \"{{#if scheduleendtime}}{{toDateTimeFormat '$(scheduleendtime)' 'dd-MM-yyyy HH:mm:ss UTC'}}{{/if}}\" {{#if otherParameters}}{{toCommaSeparatedKeyValueList otherParameters true}}{{/if}}{{#equals changeType 'Standard' 1}}{{#if standardChangeTemplate}} , \"template_id\": \"$(standardChangeTemplate)\" {{/if}}{{/equals}} }",
             "Headers": "{\"Content-Type\":\"application/json\", \"Accept\":\"application/json\"}",
-            "WaitForCompletion": "false",	
-            "Expression": "eq(jsonpath('$.result.state')[0], '-5')"
+            "WaitForCompletion": "false",
+            "Expression": "eq(jsonpath('$.result.phase_state')[0], 'open')"
           },
           "ExecutionOptions": {
             "OutputVariables": "{\"CHANGE_SYSTEM_ID\" :  \"jsonpath('$.result.sys_id')[0]\"}",
@@ -388,12 +388,12 @@
           {
             "RequestInputs": {
               "EndpointId": "$(ServiceNowConnection)",
-              "EndpointUrl": "$(endpoint.url)/api/now/table/change_request",
-              "Method": "POST",
-              "Body": "{ \"correlation_id\": \"$(CHANGE_CORRELATION_ID)\", \"number\" : \"$(CHANGE_REQUEST_NUMBER)\", \"work_notes\" : \"$(workNotes)\" {{#if otherParameters}}{{toCommaSeparatedKeyValueList otherParameters true}}{{/if}} }",
+              "EndpointUrl": "$(endpoint.url)/api/now/table/change_request/$(CHANGE_SYSTEM_ID)",
+              "Method": "PUT",
+              "Body": "{ \"correlation_id\": \"$(CHANGE_CORRELATION_ID)\", \"work_notes\" : \"$(workNotes)\" {{#if otherParameters}}{{toCommaSeparatedKeyValueList otherParameters true}}{{/if}} }",
               "Headers": "{\"Content-Type\":\"application/json\", \"Accept\":\"application/json\"}",
               "WaitForCompletion": "false",
-              "Expression": "eq(jsonpath('$.result.phase')[0], 'requested')"
+              "Expression": "eq(jsonpath('$.result.number')[0], '$(changeRequestNumber)')"
             },
             "ExecutionOptions": {
               "OutputVariables": "{\"CHANGE_REQUEST_NUMBER\" :  \"jsonpath('$.result.number')[0]\", \"CHANGE_SYSTEM_ID\" :  \"jsonpath('$.result.sys_id')[0]\"}",
