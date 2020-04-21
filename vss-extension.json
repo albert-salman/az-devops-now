@@ -1,10 +1,10 @@
 {
   "manifestVersion": 1,
-  "id": "vss-services-poormanservicenowchg",
+  "id": "vss-services-devservicenowchg",
   "name": "Developer ServiceNow CHG Release Gate",
   "publisher": "thitool",
   "version": "0.2.0",
-  "public": false,
+  "public": true,
   "description": "Integrate ServiceNow Change Management (including developer instances) with Azure Pipelines",
   "categories": [
     "Azure Pipelines"
@@ -275,7 +275,7 @@
             ]
           }
         ],
-        "helpMarkDown": "<a href=\"https://docs.microsoft.com/en-us/azure/devops/pipelines/release/approvals/servicenow?view=azure-devops\" target=\"_blank\"><b>Learn More about ServiceNow integration</b></a>"
+        "helpMarkDown": "<a href=\"https://github.com/albert-salman/az-devops-now\" target=\"_blank\"><b>Learn More about this ServiceNow integration</b></a>"
       }
     },
     {

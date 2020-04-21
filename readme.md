@@ -107,7 +107,7 @@ Additional properties can be set in the created change request using the followi
 - **Configuration Item**: Configuration item (CI) that the change applies to.
 - **Assignment group**:  The group that the change is assigned to.
 - **Schedule of change request**: Schedule of the change as honored by the ServiceNow workflow. Date and time should be in UTC and format should be `yyyy-MM-ddTHH:mm:ssZ. eg. 2018-01-31T07:56:59Z.`
-- **Additional change request parameters**:  Additional properties of the change request to set.                                                                                      Name must be field name (not label) prefixed with 'u_' `eg. u_backout_plan`.                                                            Value must be a valid, accepted value in ServiceNow. Invalid entries are ignored.
+- **Additional change request parameters**:  Additional properties of the change request to set.                                                                                      Name must be field name (not label) prefixed with 'u_' `eg. backout_plan`.                                                            Value must be a valid, accepted value in ServiceNow. Invalid entries are ignored.
 
 **Gate Success Criteria** :
 

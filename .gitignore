@@ -2,6 +2,8 @@ dist/
 built/
 .vscode/
 
+yarn.lock
+
 node_modules/
 npm-debug.log
 

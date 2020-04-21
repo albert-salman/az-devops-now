@@ -1,5 +1,5 @@
 ﻿{
-  "id": "539E1E16-0680-4F8E-85D0-95B6FDE76E8A",
+  "id": "539E1E16-0680-4F8E-85D0-95B6FDE76E8B",
   "name": "CreateAndQueryChangeRequest",
   "friendlyName": "ServiceNow Change Management",
   "description": "Gate on status of new change request or an existing change request in ServiceNow.",
